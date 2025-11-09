@@ -41,6 +41,12 @@ export default function Board() {
   // Creating a copy of data allows for "time travel" / "undo" features
   // As opposed to directly editing squares array
   function handleClick(i) {
+    
+    // Exit function if square is already filled
+    if (squares[i]) {
+      return;
+    }
+
     const nextSquares = squares.slice();
     if (xIsNext) {
       nextSquares[i] = "X";
