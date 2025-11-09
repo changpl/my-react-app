@@ -7,34 +7,16 @@ function Square({ value, onSquareClick }) {
       {value}
     </button>
   );
-
-  // // React function to "remember" state
-  // const [value, setValue] = useState(null);
-
-  // // Display 'X' when square is clicked
-  // function handleClick() {
-  //   console.log('clicked!');
-  //   setValue('X'); 
-  // }
-  
-  // return (
-  //   <button 
-  //     className="square"
-  //     onClick={handleClick}
-  //   >
-  //     {value}
-  //   </button>
-  // );
 }
 
 function Board({ xIsNext, squares, onPlay }) {
-  // Keeps track of whose turn it is
-  const [xIsNext, setXIsNext] = useState(true);
+  // // Keeps track of whose turn it is
+  // const [xIsNext, setXIsNext] = useState(true);
 
-  // Array of 9 nulls corresponding to 9 squares to store game state
-  // Declare state in parent (board) instead of children (square)
-  // Pass state down to children with props
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  // // Array of 9 nulls corresponding to 9 squares to store game state
+  // // Declare state in parent (board) instead of children (square)
+  // // Pass state down to children with props
+  // const [squares, setSquares] = useState(Array(9).fill(null));
 
   // Updates ith square by creating copy of squares array
   // Creating a copy of data allows for "time travel" / "undo" features
@@ -96,6 +78,24 @@ export default function Game() {
     setHistory([...history, nextSquares]);
     setXIsNext(!xIsNext);
   }
+
+  function jumpTo(nextMove) {
+    // TODO
+  }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = 'Go to move #' + move;
+    } else {
+      description = 'Go to game start';
+    }
+    return (
+      <li>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
 
   return (
     <div className="game">
