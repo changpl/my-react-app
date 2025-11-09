@@ -30,16 +30,25 @@ function Square({ value, onSquareClick }) {
 // Board with 3 rows, each with 3 squares
 export default function Board() {
 
+  const [xIsNext, setXIsNext] = useState(true);
+
   // Array of 9 nulls corresponding to 9 squares to store game state
   // Declare state in parent (board) instead of children (square)
   // Pass state down to children with props
   const [squares, setSquares] = useState(Array(9).fill(null));
 
-  // Updates ith square
+  // Updates ith square by creating copy of squares array
+  // Creating a copy of data allows for "time travel" / "undo" features
+  // As opposed to directly editing squares array
   function handleClick(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
