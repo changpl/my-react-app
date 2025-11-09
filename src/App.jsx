@@ -27,7 +27,7 @@ function Square({ value, onSquareClick }) {
   // );
 }
 
-export default function Board() {
+function Board() {
   // Keeps track of whose turn it is
   const [xIsNext, setXIsNext] = useState(true);
 
@@ -87,6 +87,19 @@ export default function Board() {
     </>
   );
 } 
+
+export default function Game() {
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board />
+      </div>
+      <div className="game-info">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
+  );
+}
 
 // Check for a winner
 function calculateWinner(squares) {
