@@ -27,7 +27,6 @@ function Square({ value, onSquareClick }) {
   // );
 }
 
-// Board with 3 rows, each with 3 squares
 export default function Board() {
 
   const [xIsNext, setXIsNext] = useState(true);
@@ -42,8 +41,8 @@ export default function Board() {
   // As opposed to directly editing squares array
   function handleClick(i) {
 
-    // Exit function if square is already filled
-    if (squares[i]) {
+    // Exit if square is already full or if someone wins
+    if (squares[i] || calculateWinner(squares)) {
       return;
     }
 
@@ -57,6 +56,16 @@ export default function Board() {
     setXIsNext(!xIsNext);
   }
 
+  // Displays next player or winner (if exists)
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+
+  // Board with 3 rows, each with 3 squares
   return (
     <>
       <div className="board-row">
