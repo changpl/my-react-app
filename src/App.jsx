@@ -1,7 +1,20 @@
+// Square component
 function Square({ value }) {
-  return <button className="square">{value}</button>;
+  function handleClick() {
+    console.log('clicked!');
+  }
+  
+  return (
+    <button 
+      className="square"
+      onClick={handleClick}
+    >
+      {value}
+    </button>
+  );
 }
 
+// Board with 3 rows, each with 3 squares
 export default function Board() {
   return (
     <>
