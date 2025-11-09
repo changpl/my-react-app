@@ -9,6 +9,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
+// Board component
 function Board({ xIsNext, squares, onPlay }) {
   // // Keeps track of whose turn it is
   // const [xIsNext, setXIsNext] = useState(true);
@@ -46,10 +47,12 @@ function Board({ xIsNext, squares, onPlay }) {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
-  // Board with 3 rows, each with 3 squares
   return (
     <>
+      {/* Displays whose turn it is or winner (if exists) */}
       <div className="status">{status}</div>
+
+      {/* 3 rows of 3 squares */}
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -105,6 +108,8 @@ export default function Game() {
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
+
+      {/* History of moves */}
       <div className="game-info">
         <ol>{moves}</ol>
       </div>
